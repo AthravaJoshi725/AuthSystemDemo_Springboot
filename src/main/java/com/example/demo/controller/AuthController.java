@@ -1,74 +1,70 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.LoginRequest;
-import com.example.demo.dto.RegisterRequest;
-import com.example.demo.enums.UserRole;
-import com.example.demo.service.UserService;
-import com.example.demo.model.User;
-
-// import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-// import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.dto.AuthResponse;
+import com.example.demo.dto.LoginRequest;
+import com.example.demo.dto.RefreshTokenRequest;
+import com.example.demo.dto.UserRequest;
+import com.example.demo.dto.UserResponse;
+import com.example.demo.service.RefreshTokenService;
+import com.example.demo.service.UserService;
+
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
+
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 public class AuthController {
+    
+    final UserService userService;
+    final RefreshTokenService refreshTokenService;
 
-    private final UserService userService;
-
-    public AuthController(UserService userService){
+    public AuthController(UserService userService, RefreshTokenService refreshTokenService){
         this.userService = userService;
+        this.refreshTokenService = refreshTokenService;
     }
-
-    @PostMapping("/register/customer")
-    public ResponseEntity<?> registerCustomer(@RequestBody RegisterRequest request) {
-
-        User user = userService.registerUser(request, UserRole.CUSTOMER);
-
-        if(user == null){
-            return ResponseEntity.status(409).body("Email already registered");
-        }
-
-        return ResponseEntity.ok(user);
-    }
-
-    @PostMapping("/register/staff")
-    public ResponseEntity<?> registerStaff(@RequestBody RegisterRequest request) {
-
-        User user = userService.registerUser(request, UserRole.STAFF);
-
-        if(user == null){
-            return ResponseEntity.status(409).body("Email already registered");
-        }
-
-        return ResponseEntity.ok(user);
-    }
-
-    @PostMapping("/register/admin")
-    public ResponseEntity<?> registerAdmin(@RequestBody RegisterRequest request) {
-
-        User user = userService.registerUser(request, UserRole.ADMIN);
-
-        if(user == null){
-            return ResponseEntity.status(409).body("Email already registered");
-        }
-
-        return ResponseEntity.ok(user);
-    }
-
+    // User login
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<AuthResponse> loginUser(@Valid  @RequestBody LoginRequest request){
 
-        User user = userService.loginUser(request);
+        AuthResponse response = userService.loginUser(request);
 
-        if(user == null){
-            return ResponseEntity.status(401).body("Invalid credentials or account inactive");
-        }
-
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(response);
     }
 
+    // User register
+    @PostMapping("/register")
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest request){
+        System.out.println("Received registration request for email: " + request.getEmail());
+        UserResponse response = userService.createUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    // User logout
+    @PostMapping("/logout")
+    public ResponseEntity<String> logoutUser(HttpServletRequest request){
+        
+        String sessionId = (String) request.getAttribute("sessionId");
+
+        String response = userService.logoutUser(sessionId);
+
+        return ResponseEntity.ok(response);
+
+    }
+
+    // User refresh token
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthResponse> refresh(@RequestBody RefreshTokenRequest request){
+        
+        AuthResponse response = refreshTokenService.generateAccessToken(request);
+
+        return ResponseEntity.ok(response);
+    }
 }

@@ -1,16 +1,14 @@
 package com.example.demo.dto;
-
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
+
 @Getter
-public class LoginRequest {
-    @Email
-    @NotBlank(message = "Add valid email")
+@Setter
+public class UpdateUserRequest {
+    private String name;
+    @Email(message = "Email is not valid")
     private String email;
-    @NotBlank(message = "Add password")
     private String password;
 }

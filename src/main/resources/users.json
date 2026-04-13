@@ -1,28 +1,46 @@
 [ {
-  "id" : "f73b8dd1-6a0c-4fb9-a47c-5ac7c11f7068",
-  "customerName" : "Heramb",
+  "id" : "6bcc440d-6f03-4fbc-8f02-ca1a0adf59d2",
+  "userName" : null,
   "email" : "joshi1@gmail.com",
   "password" : "1255534",
   "phoneNumber" : "999992299",
-  "createdAt" : "2026-02-02T21:47:38.2728977",
+  "createdAt" : "2026-02-02T22:00:50.8692318",
   "role" : "CUSTOMER",
   "status" : "ACTIVE"
 }, {
-  "id" : "efa58beb-5ad6-4ae7-8542-12acc762e7a9",
-  "customerName" : "Heramb",
-  "email" : "josh21@gmail.com",
+  "id" : "ed3977f9-165d-4a76-bdd4-5761be03d6f2",
+  "userName" : null,
+  "email" : "jossshi1@gmail.com",
   "password" : "1255534",
   "phoneNumber" : "999992299",
-  "createdAt" : "2026-02-02T21:49:13.853683",
-  "role" : "STAFF",
+  "createdAt" : "2026-02-02T22:01:19.0615026",
+  "role" : "CUSTOMER",
   "status" : "ACTIVE"
 }, {
-  "id" : "5c5f9ba0-9d5e-49d1-bae8-9af30ee1ff7a",
-  "customerName" : "Heramb",
-  "email" : "j2sh21@gmail.com",
+  "id" : "f2ba161f-f263-4603-8bd8-bf0d63b52eea",
+  "userName" : null,
+  "email" : "jossshi1a@gmail.com",
   "password" : "1255534",
   "phoneNumber" : "999992299",
-  "createdAt" : "2026-02-02T21:50:06.0794081",
-  "role" : "ADMIN",
+  "createdAt" : "2026-02-02T22:01:31.157215",
+  "role" : "CUSTOMER",
+  "status" : "ACTIVE"
+}, {
+  "id" : "2112c19b-f610-4acd-9184-8e2efa7a4230",
+  "userName" : "Heeramb",
+  "email" : "josssh1a@gmail.com",
+  "password" : "1255534",
+  "phoneNumber" : "999992299",
+  "createdAt" : "2026-02-02T22:02:43.5245804",
+  "role" : "CUSTOMER",
+  "status" : "ACTIVE"
+}, {
+  "id" : "f1b52ac1-8eb0-4fe6-ae61-a5c7090d8d14",
+  "userName" : "Heb",
+  "email" : "jh1a@gmail.com",
+  "password" : "125534",
+  "phoneNumber" : "99992299",
+  "createdAt" : "2026-02-02T22:04:05.4298994",
+  "role" : "STAFF",
   "status" : "ACTIVE"
 } ]
